@@ -88,3 +88,40 @@ test>  db.movies.find({}, { name: 1 }).sort({"name":1}).skip(1)
 ]
 test>
 
+//operators📐
+
+test> db.movies.find({ ratings: { $lt: 7 } })   //📌$lt means less than
+[
+  {
+    _id: ObjectId('680222a59b43f57688b5f89a'),
+    name: 'john wick 4',
+    ratings: 5
+  },
+  {
+    _id: ObjectId('680222a59b43f57688b5f89b'),
+    name: 'Raone',
+    ratings: 6
+  },
+  {
+    _id: ObjectId('680222a59b43f57688b5f89c'),
+    name: 'Raone',
+    ratings: 6
+  }
+]
+test>
+
+
+test> db.movies.find({ ratings: { $gt: 7 } })  //📌$gt means greater than
+[
+  {
+    _id: ObjectId('680222a59b43f57688b5f89d'),
+    name: 'hero',
+    ratings: 8
+  },
+  {
+    _id: ObjectId('680222a59b43f57688b5f89e'),
+    name: 'Taj mahal',
+    ratings: 9
+  }
+]
+test>

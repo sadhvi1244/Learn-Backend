@@ -1,0 +1,42 @@
+test> db.movies.updateOne.help()
+
+  db.collection.updateOne(filter, update, options):
+
+  Updates a single document within the collection based on the filter.
+
+  For more information on usage: https://docs.mongodb.com/manual/reference/method/db.collection.updateOne
+test>
+
+//📌UpdateOne
+
+test> db.movies.updateOne( { name: "hero" }, { $set: { name: "zero" } })
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+test>
+
+test>  db.movies.updateOne( { name: "zero" }, { $set: { ratings: 7 } })
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+test>
+
+//📌UdateMany
+
+test> db.movies.updateMany( { ratings: 6 }, { $set: { ratings: 3 } })
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+test>
