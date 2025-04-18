@@ -1,0 +1,17 @@
+test> const result = db.movies.find().toArray()
+
+test> console.table(result)
+┌─────────┬──────────────────────────────────────┬────────────────┬─────────┐
+│ (index) │ _id                                  │ name           │ ratings │
+├─────────┼──────────────────────────────────────┼────────────────┼─────────┤
+│ 0       │ ObjectId('680222a59b43f57688b5f89a') │ 'john wick 4'  │ 5       │
+│ 1       │ ObjectId('680222a59b43f57688b5f89b') │ 'Raone'        │ 3       │
+│ 2       │ ObjectId('680222a59b43f57688b5f89c') │ 'Raone'        │ 3       │
+│ 3       │ ObjectId('680222a59b43f57688b5f89d') │ 'zero'         │ 7       │
+│ 4       │ ObjectId('680222a59b43f57688b5f89e') │ 'Taj mahal'    │ 9       │
+│ 5       │ ObjectId('6802545d9b43f57688b5f8a0') │ 'Harry porter' │ 5       │
+│ 6       │ ObjectId('680254f49b43f57688b5f8a3') │ 'Momento'      │ 5       │
+│ 7       │ ObjectId('680256c19b43f57688b5f8a4') │ 'Pk'           │ 4       │
+└─────────┴──────────────────────────────────────┴────────────────┴─────────┘
+
+test>

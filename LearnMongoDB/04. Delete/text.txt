@@ -1,0 +1,20 @@
+test> db.movies.deleteOne.help()
+
+  db.collection.deleteOne(filter, options):
+
+  Removes a single document from a collection.
+
+  For more information on usage: https://docs.mongodb.com/manual/reference/method/db.collection.deleteOne
+test>
+
+//📌deleteOne
+
+test> db.movies.deleteOne({"name":"Ectractoin 2"})
+{ acknowledged: true, deletedCount: 1 }
+test>
+
+//📌deleteMany
+
+test> db.movies.deleteMany({ratings:6})
+{ acknowledged: true, deletedCount: 2 }
+test>
