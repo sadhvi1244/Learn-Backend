@@ -1,0 +1,90 @@
+//Limit  🔪
+
+test>  db.movies.find().limit(2)
+[
+  {
+    _id: ObjectId('6802202f9b43f57688b5f899'),
+    name: 'Ectractoin 2',
+    rating: 4
+  },
+  {
+    _id: ObjectId('680222a59b43f57688b5f89a'),
+    name: 'john wick 4',
+    ratings: 5
+  }
+]
+test>
+
+//Sort 🔍
+
+test> db.movies.find()
+[
+  {
+    _id: ObjectId('6802202f9b43f57688b5f899'),
+    name: 'Ectractoin 2',
+    rating: 4
+  },
+  {
+    _id: ObjectId('680222a59b43f57688b5f89a'),
+    name: 'john wick 4',
+    ratings: 5
+  },
+  {
+    _id: ObjectId('680222a59b43f57688b5f89b'),
+    name: 'Raone',
+    ratings: 6
+  },
+  {
+    _id: ObjectId('680222a59b43f57688b5f89c'),
+    name: 'Raone',
+    ratings: 6
+  },
+  {
+    _id: ObjectId('680222a59b43f57688b5f89d'),
+    name: 'hero',
+    ratings: 8
+  },
+  {
+    _id: ObjectId('680222a59b43f57688b5f89e'),
+    name: 'Taj mahal',
+    ratings: 9
+  }
+]
+
+test> db.movies.find({}, { name: 1 }).sort({ name: 1 })
+[
+  { _id: ObjectId('6802202f9b43f57688b5f899'), name: 'Ectractoin 2' },
+  { _id: ObjectId('680222a59b43f57688b5f89b'), name: 'Raone' },
+  { _id: ObjectId('680222a59b43f57688b5f89c'), name: 'Raone' },
+  { _id: ObjectId('680222a59b43f57688b5f89e'), name: 'Taj mahal' },
+  { _id: ObjectId('680222a59b43f57688b5f89d'), name: 'hero' },
+  { _id: ObjectId('680222a59b43f57688b5f89a'), name: 'john wick 4' }
+]
+test>
+
+test>  db.movies.find({}, { name: 1 }).sort({ name: -1 })    //🔎 sort in descending order by the name field (Z → A).
+[
+  { _id: ObjectId('680222a59b43f57688b5f89a'), name: 'john wick 4' },
+  { _id: ObjectId('680222a59b43f57688b5f89d'), name: 'hero' },
+  { _id: ObjectId('680222a59b43f57688b5f89e'), name: 'Taj mahal' },
+  { _id: ObjectId('680222a59b43f57688b5f89b'), name: 'Raone' },
+  { _id: ObjectId('680222a59b43f57688b5f89c'), name: 'Raone' },
+  { _id: ObjectId('6802202f9b43f57688b5f899'), name: 'Ectractoin 2' }
+]
+test>
+
+//sorting is case-sensitive in MongoDB by default, and uppercase letters (like T) can appear before lowercase (like j) in ASCII.
+
+
+//skip 📲
+
+test>  db.movies.find({}, { name: 1 }).sort({"name":1}).skip(1)
+[
+  { _id: ObjectId('680222a59b43f57688b5f89b'), name: 'Raone' },
+  { _id: ObjectId('680222a59b43f57688b5f89c'), name: 'Raone' },
+  { _id: ObjectId('680222a59b43f57688b5f89e'), name: 'Taj mahal' },
+  { _id: ObjectId('680222a59b43f57688b5f89d'), name: 'hero' },
+  { _id: ObjectId('680222a59b43f57688b5f89a'), name: 'john wick 4' }
+]
+test>
+

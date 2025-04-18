@@ -1,0 +1,218 @@
+//open terminal🐢
+
+
+PS C:\Users\sadhv> mongosh
+Current Mongosh Log ID: 68021ea89b43f57688b5f898
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.5.0
+Using MongoDB:          8.0.8
+Using Mongosh:          2.5.0
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2025-04-18T14:49:40.465+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> show dbs
+admin    40.00 KiB
+config  108.00 KiB
+local    40.00 KiB
+test> show dbs
+admin    40.00 KiB
+config  108.00 KiB
+local    40.00 KiB
+test> db.get
+test.get
+test> db.getName()
+test
+test> const name = "sadhvi"
+
+test> name
+sadhvi
+test> const data = {"name":"sadhvi","age":18}
+
+test> data
+{ name: 'sadhvi', age: 18 }
+test> data.age
+18
+
+//this is how we create and insert the data🌟
+
+test> db.collectionName.insertOne()
+MongoshInvalidInputError: [COMMON-10001] Missing required argument at position 0 (Collection.insertOne)
+test>  db.movies.insertOne({"name":"Ectractoin 2",rating:4})
+{
+  acknowledged: true,
+  insertedId: ObjectId('6802202f9b43f57688b5f899')
+}
+test> show collections
+movies
+test> db.movies.insertOne.help()
+
+  db.collection.insertOne(document, options):
+
+  Inserts a document into a collection.
+
+  For more information on usage: https://docs.mongodb.com/manual/reference/method/db.collection.insertOne
+test> db.movies.insertMany.help()    //📺
+
+  db.collection.insertMany(documents, options):
+
+  Inserts multiple documents into a collection.
+
+  For more information on usage: https://docs.mongodb.com/manual/reference/method/db.collection.insertMany
+test> m1 = {"name":"john wick 4",ratings:5}
+{ name: 'john wick 4', ratings: 5 }
+test> m2 = {"name":"Raone",ratings:6}
+{ name: 'Raone', ratings: 6 }
+test> m3 = {"name":"Transformers",ratings:7}
+{ name: 'Transformers', ratings: 7 }
+test> m4 = {"name":"hero",ratings:8}
+{ name: 'hero', ratings: 8 }
+test> m5 ={"name":"Taj mahal",ratings:9}
+{ name: 'Taj mahal', ratings: 9 }
+test> db.movies.insertMany([m1,m2,m2,m4,m5])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('680222a59b43f57688b5f89a'),
+    '1': ObjectId('680222a59b43f57688b5f89b'),
+    '2': ObjectId('680222a59b43f57688b5f89c'),
+    '3': ObjectId('680222a59b43f57688b5f89d'),
+    '4': ObjectId('680222a59b43f57688b5f89e')
+  }
+}
+test>
+
+//how we read the data
+
+test> db.movies.find()
+[
+  {
+    _id: ObjectId('6802202f9b43f57688b5f899'),
+    name: 'Ectractoin 2',
+    rating: 4
+  },
+  {
+    _id: ObjectId('680222a59b43f57688b5f89a'),
+    name: 'john wick 4',
+    ratings: 5
+  },
+  {
+    _id: ObjectId('680222a59b43f57688b5f89b'),
+    name: 'Raone',
+    ratings: 6
+  },
+  {
+    _id: ObjectId('680222a59b43f57688b5f89c'),
+    name: 'Raone',
+    ratings: 6
+  },
+  {
+    _id: ObjectId('680222a59b43f57688b5f89d'),
+    name: 'hero',
+    ratings: 8
+  },
+  {
+    _id: ObjectId('680222a59b43f57688b5f89e'),
+    name: 'Taj mahal',
+    ratings: 9
+  }
+]
+test>
+
+//how we find specific data 🔎
+
+test> db.movies.find({"name":"hero"})
+[
+  {
+    _id: ObjectId('680222a59b43f57688b5f89d'),
+    name: 'hero',
+    ratings: 8
+  }
+]
+test>
+
+test> db.movies.find({genre:"advanture"})
+
+test> //there is nother like genre in our collection so it return null
+
+test> db.movies.find({rating:5})
+
+test> db.movies.find({rating:4})
+[
+  {
+    _id: ObjectId('6802202f9b43f57688b5f899'),
+    name: 'Ectractoin 2',
+    rating: 4
+  }
+]
+test>
+
+test> db.movies.find({"name":"Taj mahal",ratings:9})
+[
+  {
+    _id: ObjectId('680222a59b43f57688b5f89e'),
+    name: 'Taj mahal',
+    ratings: 9
+  }
+]
+test>
+
+test> db.movies.find({"name":"Taj mahal"},{"name":1})   //✅1 means include this field.
+[ { _id: ObjectId('680222a59b43f57688b5f89e'), name: 'Taj mahal' } ]
+test>
+
+test> db.movies.find({"name":"Taj mahal"},{"name":0})     //✅0 means Don't include the name field in the result. Show everything else
+[ { _id: ObjectId('680222a59b43f57688b5f89e'), ratings: 9 } ]
+test>
+
+test> db.movies.find({},{"name":1})   ✅exclude name, show others. from all collections
+[
+  { _id: ObjectId('6802202f9b43f57688b5f899'), name: 'Ectractoin 2' },
+  { _id: ObjectId('680222a59b43f57688b5f89a'), name: 'john wick 4' },
+  { _id: ObjectId('680222a59b43f57688b5f89b'), name: 'Raone' },
+  { _id: ObjectId('680222a59b43f57688b5f89c'), name: 'Raone' },
+  { _id: ObjectId('680222a59b43f57688b5f89d'), name: 'hero' },
+  { _id: ObjectId('680222a59b43f57688b5f89e'), name: 'Taj mahal' }
+]
+test>
+
+
+//🍽️🌟Summary✅
+
+🔧 1. Connected to MongoDB
+Used mongosh to open the MongoDB shell.
+Verified connection and checked current database using db.getName().
+
+🗃️ 2. Created & Inserted Data
+Used insertOne() to insert a single document.
+
+Used insertMany() to insert multiple movie documents.
+
+js
+Copy code
+db.movies.insertOne({ name: "Ectractoin 2", rating: 4 })
+db.movies.insertMany([m1, m2, m3, m4, m5])
+📂 3. Viewed Collections
+show collections → displayed existing collections like movies.
+
+🔍 4. Read (Queried) Data
+db.movies.find() → retrieved all documents.
+
+Filtered with conditions:
+
+By name: {"name": "hero"}
+
+By rating: { rating: 4 }
+
+By combined fields: { "name": "Taj mahal", ratings: 9 }
+
+🔎 5. Used Projections
+Show only selected fields:
+
+{ "name": 1 } → include name only.
+
+{ "name": 0 } → exclude name, show others.
+
